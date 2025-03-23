@@ -1,7 +1,6 @@
-# main.tf
 
 provider "aws" {
-  region = var.region  # AWS Region from variables
+  region = var.region  
 }
 
 # VPC Configuration
@@ -27,7 +26,7 @@ resource "aws_subnet" "eks_subnet_public" {
   }
 }
 
-# Private Subnet
+
 resource "aws_subnet" "eks_subnet_private" {
   vpc_id                  = aws_vpc.eks_vpc.id
   cidr_block              = var.private_subnet_cidr
@@ -38,7 +37,6 @@ resource "aws_subnet" "eks_subnet_private" {
   }
 }
 
-# Internet Gateway
 resource "aws_internet_gateway" "eks_gateway" {
   vpc_id = aws_vpc.eks_vpc.id
 
@@ -47,32 +45,32 @@ resource "aws_internet_gateway" "eks_gateway" {
   }
 }
 
-# Route Table for Public Subnet
+
 resource "aws_route_table" "eks_route_table" {
   vpc_id = aws_vpc.eks_vpc.id
 }
 
-# Route for Public Subnet to Internet Gateway
+
 resource "aws_route" "eks_route" {
   route_table_id         = aws_route_table.eks_route_table.id
   destination_cidr_block = "0.0.0.0/0"
   gateway_id             = aws_internet_gateway.eks_gateway.id
 }
 
-# Associate Route Table to Public Subnet
+
 resource "aws_route_table_association" "eks_route_association" {
   subnet_id      = aws_subnet.eks_subnet_public.id
   route_table_id = aws_route_table.eks_route_table.id
 }
 
-# Security Group for EKS Nodes
+
 resource "aws_security_group" "eks_security_group" {
   name        = "eks-security-group"
   description = "Allow all inbound traffic for EKS nodes"
   vpc_id      = aws_vpc.eks_vpc.id
 }
 
-# IAM Role for EKS Cluster
+
 resource "aws_iam_role" "eks_role" {
   name = "eks-cluster-role"
 
@@ -90,13 +88,13 @@ resource "aws_iam_role" "eks_role" {
   })
 }
 
-# Attach the AmazonEKSClusterPolicy to the EKS Cluster Role
+
 resource "aws_iam_role_policy_attachment" "eks_role_policy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
   role       = aws_iam_role.eks_role.name
 }
 
-# IAM Role for EKS Node Group
+
 resource "aws_iam_role" "eks_node_group_role" {
   name = "eks-node-group-role"
 
@@ -114,7 +112,7 @@ resource "aws_iam_role" "eks_node_group_role" {
   })
 }
 
-# Attach Policies for EKS Node Group Role
+
 resource "aws_iam_role_policy_attachment" "eks_node_group_policy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy"
   role       = aws_iam_role.eks_node_group_role.name
@@ -125,7 +123,7 @@ resource "aws_iam_role_policy_attachment" "eks_node_group_policy_additional" {
   role       = aws_iam_role.eks_node_group_role.name
 }
 
-# EKS Cluster
+
 resource "aws_eks_cluster" "eks_cluster" {
   name     = var.eks_cluster_name
   role_arn = aws_iam_role.eks_role.arn
@@ -143,7 +141,7 @@ resource "aws_eks_cluster" "eks_cluster" {
   ]
 }
 
-# EKS Node Group
+
 resource "aws_eks_node_group" "eks_node_group" {
   cluster_name    = aws_eks_cluster.eks_cluster.name
   node_group_name = var.node_group_name
@@ -164,7 +162,7 @@ resource "aws_eks_node_group" "eks_node_group" {
   ]
 }
 
-# Outputs
+
 output "eks_cluster_endpoint" {
   value = aws_eks_cluster.eks_cluster.endpoint
 }
