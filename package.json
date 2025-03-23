@@ -1,0 +1,13 @@
+{
+  "name": "Webserver",
+  "version": "1.0.0",
+  "description": "A simple Webserver app",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "sonar": "sonar-scanner"
+  },
+  "dependencies": {},
+  "author": "",
+  "license": "ISC"
+}

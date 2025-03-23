@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-app-service
+  namespace: server  # Specify the namespace here
+spec:
+  selector:
+    app: my-app
+  ports:
+    - protocol: TCP
+      port: 80        # External port to access the service
+      targetPort: 3000 # The port inside the container
+  type: LoadBalancer  # This will create a LoadBalancer service in cloud environments like AWS, GCP, or Azure
