@@ -18,6 +18,7 @@ Features
 
 
 Prerequisites
+=============
 Before using this pipeline, ensure you have the following:
 
 GitHub Actions enabled for your repository.
@@ -31,6 +32,7 @@ A Kubernetes cluster for deployment, managed using ArgoCD for GitOps.
 Secrets configured in GitHub for sensitive variables.
 
 GitHub Actions Variables Setup
+==================================
 Make sure to set the following secrets and environment variables in your GitHub repository to ensure smooth execution of the CI/CD pipeline:
 
 GitHub Secrets
