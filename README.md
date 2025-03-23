@@ -31,7 +31,7 @@ GitHub Actions Variables Setup
 Make sure to set the following secrets and environment variables in your GitHub repository to ensure smooth execution of the CI/CD pipeline:
 
 GitHub Secrets
-SONAR_HOST_URL: URL of your SonarQube server. (e.g., https://sonarqube.example.com)
+SONAR_HOST_URL: URL of your SonarQube server (e.g., https://sonarqube.example.com).
 
 SONAR_TOKEN: The authentication token for accessing SonarQube.
 
@@ -45,13 +45,14 @@ ARGOCD_SERVER: The ArgoCD server URL for managing GitOps.
 
 ARGOCD_TOKEN: The token for authenticating with ArgoCD.
 
-These secrets can be configured in the Settings > Secrets and Variables > Actions section of your GitHub repository.
+These secrets can be configured in Settings > Secrets and Variables > Actions section of your GitHub repository.
 
 Additional Environment Variables
 You can also define variables for specific tasks:
 
-NODE_VERSION: Set the Node.js version (e.g., '14').
+NODE_VERSION: Set the Node.js version (e.g., 14).
 
 DOCKER_IMAGE_TAG: Define a custom Docker image tag, if needed.
 
 DEPLOYMENT_YAML_PATH: Path to your Kubernetes deployment YAML file (e.g., ./kube/deployment.yaml).
+
