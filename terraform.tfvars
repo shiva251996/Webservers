@@ -1,0 +1,12 @@
+region               = "us-west-2"
+vpc_cidr             = "10.0.0.0/16"
+public_subnet_cidr   = "10.0.1.0/24"
+private_subnet_cidr  = "10.0.2.0/24"
+availability_zone_1  = "us-west-2a"
+availability_zone_2  = "us-west-2b"
+eks_cluster_name     = "my-eks-cluster"
+node_group_name      = "my-node-group"
+desired_node_count   = 2
+max_node_count       = 3
+min_node_count       = 1
+instance_type        = "t3.medium"
